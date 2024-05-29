@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ <style>
+    body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: beige;
+    font-family: Arial, sans-serif;
+    }
+    
+    #spisok {
+    width: 400px;
+    background-color: pink;
+    border: 2px solid grey;
+    font-size: 30px;
+    }
+        li {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <ul id="spisok">
+        <li id="pc">This PC
+            <ul>
+                <li>Local Disk (C:)
+                    <ul>
+                        <li>Program Files</li>
+                        <li>Users</li>
+                        <li>Windows</li>
+                    </ul>
+                </li>
+                <li>Local Disk (D:)
+                    <ul>
+                        <li>New Folder 1</li>
+                        <li>New Folder 2</li>
+                        <li>New Folder 3</li>
+                    </ul>
+                </li>
+                <li>Local Disk (E:)</li>
+            </ul>
+        </li>
+    </ul>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            function hide(event) {
+                event.stopPropagation();
+                const childElem = event.target.querySelector('ul');
+                if (childElem) {
+                    childElem.style.display = childElem.style.display === 'none' ? 'block' : 'none';
+                }
+            }
+
+            function setBold(event) {
+                event.target.style.fontWeight = 'bold';
+            }
+
+            function setNormal(event) {
+                event.target.style.fontWeight = 'normal';
+            }
+
+            const lis = document.querySelectorAll('li');
+            lis.forEach(li => {
+                li.addEventListener('click', hide);
+                li.addEventListener('mouseover', setBold);
+                li.addEventListener('mouseout', setNormal);
+            });         
+            
+        });
+    </script>
+</body>
+</html>

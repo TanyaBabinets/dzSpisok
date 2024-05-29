@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table td {
+            width: 900px;
+            height: auto;
+           
+            font-size: 22px;
+        }
+
+        .selected {
+            background-color: orange;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <table style="background-color: lightblue;">
+        <tbody>
+            <tr>
+                <td>1."Clean Code: A Handbook of Agile Software Craftsmanship" - Robert C. Martin</td>
+            </tr>
+            <tr>
+                <td>2."The Pragmatic Programmer: Your Journey to Mastery" - Andrew Hunt и David Thoma</td>
+            </tr>
+            <tr>
+                <td>3. "JavaScript: The Good Parts" by Douglas Crockford</td>
+            </tr>
+            <tr>
+                <td>4."Code Complete: A Practical Handbook of Software Construction" - Steve McConnell</td>
+            </tr>
+            <tr>
+                <td>5. "Effective JavaScript: 68 Specific Ways to Harness the Power of JavaScript" by David Herman</td>
+            </tr>
+            <tr>
+                <td>6. "JavaScript: The Definitive Guide" by David Flanagan</td>
+            </tr>
+            <tr>
+                <td>7. "You Don’t Know JS" by Kyle Simpson</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let rows = document.querySelectorAll('tr');
+            rows.forEach((element) => {
+                element.onmousedown = paint;
+            });
+
+            let lastRow;// это последняя выделенная строка, например для диапазона нужна, или просто снять с нее выделение 
+
+            function paint(event) {
+                if (event.shiftKey) {
+                    if (lastRow) {
+                        let start = Math.min(lastRow.rowIndex, this.rowIndex);
+                        let end = Math.max(lastRow.rowIndex, this.rowIndex);//диапазон от и до
+                        for (let i = start; i <= end; i++) {
+                            rows[i].classList.add('selected');
+                        }
+                    }
+                } else if (event.ctrlKey) {
+                    this.classList.toggle('selected');
+                } else {
+                    document.querySelectorAll('.selected').forEach((elem) => {
+                        elem.classList.remove('selected'); //снять все выделенное
+                    });
+                    this.classList.add('selected');//this это строка на кот.кликнули
+                }
+
+                lastRow = this.classList.contains('selected') ? this : null;// это обновление состояния текущей строки, на кот.кликнули
+            }
+        });
+    </script>
+</body>
+
+</html>

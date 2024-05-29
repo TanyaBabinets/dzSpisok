@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 600px;
+            height: 200px;
+            border: 2px solid black;
+            position: relative;
+            font-size: 18px;
+            background-color: bisque;
+        }
+
+        #dot {
+            width: 10px;
+            height: 10px;
+            background-color: #000;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            cursor: se-resize;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+
+        Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной
+        "рыбой" для
+        текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию
+        размеров и форм
+        шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных
+        изменений
+        пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация
+        листов Letraset с
+        образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus
+        PageMaker, в
+        шаблонах которых используется Lorem Ipsum.
+        <div id="dot"></div> 
+    </div>
+    <script>
+        const box = document.getElementById('box');//div
+        const dot = document.getElementById('dot');//это точка за которую тянуть надо
+        dot.addEventListener('mousedown', changeBox);
+        function changeBox(e) {
+            window.addEventListener('mousemove', change)
+            window.addEventListener('mouseup', stopChange)
+        }
+        function change(e) {
+            box.style.width = e.clientX - box.offsetLeft + 'px';
+            box.style.height = e.clientY - box.offsetTop + 'px';
+        }
+        function stopChange() {
+            window.removeEventListener('mousemove', change)
+            window.removeEventListener('mouseup', stopChange)
+        }
+    </script>
+
+</body>
+
+</html>
